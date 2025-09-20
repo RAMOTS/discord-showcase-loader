@@ -1,6 +1,7 @@
 """
 Discord Showcase Loader - Automatically download media from Discord to Synology NAS
 """
+import os
 import logging
 import asyncio
 import re
