@@ -128,7 +128,9 @@ class SynologyDownloadStation:
         
         download_url = urljoin(self.api_url, "DownloadStation/task.cgi")
         
-        params = {
+        # Use POST data instead of GET parameters for task creation
+        # This prevents 403 Forbidden errors that occur with GET requests
+        data = {
             "api": "SYNO.DownloadStation.Task",
             "version": "3",
             "method": "create",
@@ -136,22 +138,34 @@ class SynologyDownloadStation:
         }
         
         if destination:
-            params["destination"] = destination
+            data["destination"] = destination
         
         cookies = {"id": self.session_id}
         
         try:
-            response = requests.get(download_url, params=params, cookies=cookies, 
-                                  verify=False, timeout=10)
+            # Use POST instead of GET for task creation operations
+            response = requests.post(download_url, data=data, cookies=cookies, 
+                                   verify=False, timeout=10)
             response.raise_for_status()
             
-            data = response.json()
-            if data.get("success"):
+            response_data = response.json()
+            if response_data.get("success"):
                 logger.info(f"Successfully created download task for: {url}")
                 return True
             else:
-                error_info = data.get("error", {})
-                logger.error(f"Failed to create download task: {error_info}")
+                error_info = response_data.get("error", {})
+                error_code = error_info.get("code")
+                
+                # Handle specific error codes for better debugging
+                if error_code == 403:
+                    logger.error(f"Access denied (403) - check permissions and session validity")
+                elif error_code == 119:
+                    logger.error(f"Session expired (119) - attempting to re-login")
+                    # Try to re-login and retry once
+                    if await self.login():
+                        return await self.create_download_task(url, destination)
+                else:
+                    logger.error(f"Failed to create download task: {error_info}")
                 return False
                 
         except Exception as e:
