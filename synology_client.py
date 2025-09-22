@@ -55,7 +55,7 @@ class SynologyDownloadStation:
             "account": self.username,
             "passwd": self.password,
             "session": "DownloadStation",
-            "format": "cookie"
+            "format": "sid"
         }
         
         try:
@@ -144,7 +144,7 @@ class SynologyDownloadStation:
         
         try:
             # Use POST instead of GET for task creation operations
-            response = requests.post(download_url, data=data, cookies=cookies, 
+            response = requests.get(download_url, data=data, cookies=cookies,
                                    verify=False, timeout=10)
             response.raise_for_status()
             
