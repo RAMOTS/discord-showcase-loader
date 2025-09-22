@@ -132,7 +132,7 @@ class SynologyDownloadStation:
         # This prevents 403 Forbidden errors that occur with GET requests
         data = {
             "api": "SYNO.DownloadStation2.Task",
-            "version": "1",
+            "version": "3",
             "method": "create",
             "uri": url
         }
@@ -187,7 +187,7 @@ class SynologyDownloadStation:
         
         params = {
             "api": "SYNO.DownloadStation2.Task",
-            "version": "1",
+            "version": "3",
             "method": "list"
         }
         
