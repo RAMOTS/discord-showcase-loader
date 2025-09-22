@@ -184,6 +184,7 @@ class SynologyDownloadStation:
             return None
         
         task_url = urljoin(self.api_url, "DownloadStation/task.cgi")
+        task_url = urljoin(self.api_url, "entry.cgi")
         
         params = {
             "api": "SYNO.DownloadStation2.Task",
