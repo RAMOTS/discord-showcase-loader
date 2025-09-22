@@ -194,7 +194,7 @@ class SynologyDownloadStation:
         cookies = {"id": self.session_id}
         
         try:
-            response = requests.get(task_url, params=params, cookies=cookies, 
+            response = requests.post(task_url, params=params, cookies=cookies,
                                   verify=False, timeout=10)
             response.raise_for_status()
             
