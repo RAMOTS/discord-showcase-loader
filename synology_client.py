@@ -50,7 +50,7 @@ class SynologyDownloadStation:
         
         params = {
             "api": "SYNO.API.Auth",
-            "version": "3",
+            "version": "2",
             "method": "login",
             "account": self.username,
             "passwd": self.password,
@@ -89,7 +89,7 @@ class SynologyDownloadStation:
         
         params = {
             "api": "SYNO.API.Auth",
-            "version": "3",
+            "version": "1",
             "method": "logout",
             "session": "DownloadStation"
         }
@@ -132,7 +132,7 @@ class SynologyDownloadStation:
         # This prevents 403 Forbidden errors that occur with GET requests
         data = {
             "api": "SYNO.DownloadStation.Task",
-            "version": "3",
+            "version": "1",
             "method": "create",
             "uri": url
         }
@@ -187,7 +187,7 @@ class SynologyDownloadStation:
         
         params = {
             "api": "SYNO.DownloadStation.Task",
-            "version": "3",
+            "version": "1",
             "method": "list"
         }
         
