@@ -131,8 +131,8 @@ class SynologyDownloadStation:
         # Use POST data instead of GET parameters for task creation
         # This prevents 403 Forbidden errors that occur with GET requests
         data = {
-            "api": "SYNO.DownloadStation.Task",
-            "version": "3",
+            "api": "SYNO.DownloadStation2.Task",
+            "version": "1",
             "method": "create",
             "uri": url
         }
@@ -186,7 +186,7 @@ class SynologyDownloadStation:
         task_url = urljoin(self.api_url, "DownloadStation/task.cgi")
         
         params = {
-            "api": "SYNO.DownloadStation.Task",
+            "api": "SYNO.DownloadStation2.Task",
             "version": "1",
             "method": "list"
         }
