@@ -50,7 +50,7 @@ class SynologyDownloadStation:
         
         params = {
             "api": "SYNO.API.Auth",
-            "version": "2",
+            "version": "3",
             "method": "login",
             "account": self.username,
             "passwd": self.password,
@@ -89,7 +89,7 @@ class SynologyDownloadStation:
         
         params = {
             "api": "SYNO.API.Auth",
-            "version": "1",
+            "version": "3",
             "method": "logout",
             "session": "DownloadStation"
         }
